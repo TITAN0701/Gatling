@@ -1,0 +1,25 @@
+<configuration>
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="HTTP_FILE" class="ch.qos.logback.core.FileAppender">
+    <file>target/requests.txt</file>
+    <append>false</append>
+    <encoder>
+      <pattern>%msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <!-- Log full HTTP request/response details (including URLs) to a readable file -->
+  <logger name="io.gatling.http.engine.response" level="TRACE" additivity="false">
+    <appender-ref ref="HTTP_FILE" />
+  </logger>
+
+  <logger name="io.gatling" level="WARN" />
+  <root level="WARN">
+    <appender-ref ref="STDOUT" />
+  </root>
+</configuration>
