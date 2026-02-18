@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="560" viewBox="0 0 1400 560">
+  <defs>
+    <style>
+      .bg { fill: #faf9f6; }
+      .box { fill: #f2f2f2; stroke: #2d2d2d; stroke-width: 2; rx: 12; ry: 12; }
+      .line { stroke: #2d2d2d; stroke-width: 2.5; marker-end: url(#arrow); }
+      .t1 { font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif; font-size: 34px; font-weight: 700; fill: #191919; }
+      .t2 { font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif; font-size: 24px; font-weight: 700; fill: #191919; }
+      .t3 { font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif; font-size: 21px; fill: #444; }
+      .mono { font-family: "Consolas", "Menlo", monospace; font-size: 20px; fill: #333; }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#2d2d2d" />
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1400" height="560"/>
+  <text class="t1" x="40" y="52">CDN 判斷流程圖（怎麼看有抓到 CDN）</text>
+
+  <rect class="box" x="40" y="90" width="260" height="90"/>
+  <text class="t2" x="70" y="145">Request_1 (warm)</text>
+
+  <line class="line" x1="300" y1="135" x2="390" y2="135"/>
+
+  <rect class="box" x="390" y="90" width="260" height="90"/>
+  <text class="t2" x="420" y="145">Request_1 (cdn)</text>
+
+  <line class="line" x1="520" y1="180" x2="520" y2="240"/>
+
+  <rect class="box" x="200" y="240" width="1120" height="270"/>
+
+  <text class="t3" x="230" y="290">1) 讀取回應 header：</text>
+  <text class="mono" x="230" y="325">x-cdn / x-iinfo / cf-ray / age / x-cache / x-cache-hits / cf-cache-status</text>
+
+  <text class="t3" x="230" y="370">2) 判斷是否經過 CDN/WAF：</text>
+  <text class="mono" x="230" y="400">cdn_in_path = (x-cdn or x-iinfo or cf-ray present)</text>
+
+  <text class="t3" x="230" y="440">3) 判斷是否命中快取：</text>
+  <text class="mono" x="230" y="470">cdn_cache_hit = (age &gt; 0 or x-cache has HIT or x-cache-hits &gt; 0 or cf-cache-status == HIT)</text>
+
+  <text class="mono" x="230" y="505">strictHit = cdn_in_path &amp;&amp; cdn_cache_hit</text>
+</svg>
